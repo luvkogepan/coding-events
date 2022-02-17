@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<header th:replace="fragments :: header"></header>
+
+<form method="post">
+
+
+        <th:block th:each="event : ${events}">
+            <div class="form-group">
+            <label>
+                <span th:text="${event.name}"></span>
+<!--                //input name is what is submitted to the server, value is data that is submitted if the checkbox is selected-->
+                <input type="checkbox" name="eventIds" th:value="${event.id}" class="form-control">
+            </label>
+            </div>
+        </th:block>
+
+<!--    //value is what button displays-->
+    <input type="submit" value="Delete" class="btn btn-danger" />
+</form>
+
+</body>
+</html>
