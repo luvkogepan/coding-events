@@ -6,6 +6,8 @@
 
 <header th:replace="fragments :: header"></header>
 
+<p th:text="${errorMsg}" style="color:red;"></p>
+
 <form method="post">
     <div class="form-group">
         <label>Name
@@ -16,6 +18,11 @@
         <label>Description
 <!--            //after model binding, name needs to match with the class field-->
             <input type="text" name="description" class="form-control"/>
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Email
+            <input type="email" name="contactEmail" class="form-control"/>
         </label>
     </div>
     <div class="form-group">
