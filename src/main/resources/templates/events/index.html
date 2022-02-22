@@ -11,10 +11,12 @@
     <tr>
         <th>Name</th>
         <th>Description</th>
+        <th>Location</th>
     </tr>
     <tr th:each="event : ${events}">
         <td th:text="${event.name}"></td>
         <td th:text="${event.description}"></td>
+        <td th:text="${event.location}"></td>
     </tr>
 </table>
 

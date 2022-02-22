@@ -1,8 +1,6 @@
 package org.launchcode.codingevents.models;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 
@@ -25,11 +23,24 @@ public class Event {
     @Email(message = "Invalid email")
     private String contactEmail;
 
-    public Event(String name, String description, String contactEmail) {
+    @NotBlank(message="Location required")
+    private String location;
+
+    @Min(value=0, message="Number of attendees can not be negative")
+    private int numAttendees;
+
+    @AssertTrue(message="Must require registration")
+    private boolean registrationRequired;
+
+    @Positive(message="Price must be positive")
+    private double price;
+
+    public Event(String name, String description, String contactEmail, String location) {
         this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
+        this.location=location;
 
     }
 
@@ -65,6 +76,38 @@ public class Event {
 
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public int getNumAttendees() {
+        return numAttendees;
+    }
+
+    public void setNumAttendees(int numAttendees) {
+        this.numAttendees = numAttendees;
+    }
+
+    public boolean isRegistrationRequired() {
+        return registrationRequired;
+    }
+
+    public void setRegistrationRequired(boolean registrationRequired) {
+        this.registrationRequired = registrationRequired;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     @Override
