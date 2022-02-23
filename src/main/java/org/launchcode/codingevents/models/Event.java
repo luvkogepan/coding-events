@@ -2,6 +2,7 @@ package org.launchcode.codingevents.models;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
@@ -23,6 +24,9 @@ public class Event {
 
     @Email(message = "Invalid email")
     private String contactEmail;
+
+    @NotNull
+    private EventType type;
 
     public Event(String name, String description, String contactEmail) {
         this();
@@ -64,6 +68,14 @@ public class Event {
 
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
+    }
+
+    public EventType getType() {
+        return type;
+    }
+
+    public void setType(EventType type) {
+        this.type = type;
     }
 
     @Override
