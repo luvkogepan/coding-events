@@ -3,6 +3,7 @@ package org.launchcode.codingevents.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -26,8 +27,10 @@ public class Event extends AbstractEntity{
     @Email(message = "Invalid email")
     private String contactEmail;
 
+    //sets up relationship between events and event categories
+    @ManyToOne
     @NotNull
-    private EventType type;
+    private EventCategory eventCategory;
 
     public Event(String name, String description, String contactEmail) {
         this.name = name;
@@ -63,12 +66,12 @@ public class Event extends AbstractEntity{
         this.contactEmail = contactEmail;
     }
 
-    public EventType getType() {
-        return type;
+    public EventCategory getEventCategory() {
+        return eventCategory;
     }
 
-    public void setType(EventType type) {
-        this.type = type;
+    public void setEventCategory(EventCategory eventCategory) {
+        this.eventCategory = eventCategory;
     }
 
     @Override
