@@ -1,14 +1,15 @@
 package org.launchcode.codingevents.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.Email;
+import org.apache.catalina.User;
+import org.aspectj.apache.bcel.generic.Tag;
+
+import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -21,22 +22,21 @@ public class Event extends AbstractEntity{
     @Size(min = 3, max = 50, message = "Name must be at least 3 characters and no longer than 50 characters")
     private String name;
 
-    @Size(max = 500, message = "Max description length is 500")
-    private String description;
-
-    @Email(message = "Invalid email")
-    private String contactEmail;
-
     //sets up relationship between events and event categories
     @ManyToOne
-    @NotNull
+    @NotNull(message = "Category is required")
     private EventCategory eventCategory;
 
-    public Event(String name, String description, String contactEmail) {
-        this.name = name;
-        this.description = description;
-        this.contactEmail = contactEmail;
+    @ManyToMany
+    private final List<Tag> tags = new ArrayList<>();
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @Valid
+    @NotNull
+    private EventDetails eventDetails;
+
+    public Event(String name) {
+        this.name = name;
     }
 
     // no-arg constructor
@@ -50,28 +50,28 @@ public class Event extends AbstractEntity{
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getContactEmail() {
-        return contactEmail;
-    }
-
-    public void setContactEmail(String contactEmail) {
-        this.contactEmail = contactEmail;
-    }
-
     public EventCategory getEventCategory() {
         return eventCategory;
     }
 
     public void setEventCategory(EventCategory eventCategory) {
         this.eventCategory = eventCategory;
+    }
+
+    public EventDetails getEventDetails() {
+        return eventDetails;
+    }
+
+    public void setEventDetails(EventDetails eventDetails) {
+        this.eventDetails = eventDetails;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void addTag(Tag tag) {
+        this.tags.add(tag);
     }
 
     @Override
